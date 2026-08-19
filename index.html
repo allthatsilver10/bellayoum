@@ -19,7 +19,11 @@
 <meta property="og:image" content="images/opening.jpg">
 <meta property="og:type" content="website">
 
-<link rel="stylesheet" href="style.css">
+<!-- ?v= is a cache-buster. GitHub Pages tells browsers to keep these files
+     for 10 minutes, so without it a returning visitor can end up running an
+     old script.js against a new index.html. Bump the number on every deploy
+     that changes style.css, script.js or gallery-data.js. -->
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 
 <body>
@@ -338,7 +342,7 @@
 
 <!-- Photo data. The .js copy lets the site run straight off the hard
      drive; script.js prefers gallery-data.json when it can load it. -->
-<script src="gallery-data.js"></script>
-<script src="script.js"></script>
+<script src="gallery-data.js?v=2"></script>
+<script src="script.js?v=2"></script>
 </body>
 </html>

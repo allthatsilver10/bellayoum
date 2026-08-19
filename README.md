@@ -166,7 +166,33 @@ mockups/            ← 시안 5종 + 수정본 (기록용, 사이트와는 무�
 
 ---
 
-## 8. 개발자용 메모
+## 8. 비밀번호
+
+사이트는 네 자리 숫자를 넣어야 열립니다. 바꾸려면 `script.js` 안의 이 한 줄만 고치면 됩니다.
+
+```js
+var PASSWORD = "1024";
+```
+
+한 번 입장하면 브라우저를 닫을 때까지 다시 묻지 않습니다.
+
+**이건 잠금장치가 아니라 커튼입니다.** 저장소가 공개라, 마음먹은 사람은 GitHub에서 파일을 직접 받아갈 수 있습니다. "링크를 타고 들어온 사람이 바로 못 보게" 하는 용도입니다.
+
+---
+
+## 9. 개발자용 메모
+
+**캐시 주의** — GitHub Pages는 파일을 10분간 캐시하라고 브라우저에 알려줍니다. 그래서
+`style.css` · `script.js` · `gallery-data.js` 를 고쳤으면 `index.html` 안의 `?v=` 숫자를
+반드시 올려야 합니다. 안 그러면 재방문자가 새 HTML에 옛 JS를 물고 돌아가서 이상하게 동작합니다.
+
+```html
+<link rel="stylesheet" href="style.css?v=2">
+<script src="gallery-data.js?v=2"></script>
+<script src="script.js?v=2"></script>
+```
+
+
 
 `tools/build-gallery.py` 는 Pillow가 필요합니다.
 
