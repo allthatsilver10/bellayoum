@@ -369,9 +369,11 @@ body.locked .intro{ display: none !important }
   border-right: 0;
   color: #FFF4F1;
   font: inherit;
-  font-size: 15px;
-  letter-spacing: .18em;
-  padding: 13px 15px;
+  font-size: 20px;
+  letter-spacing: .6em;        /* four digits, spaced like a keypad */
+  text-indent: .6em;
+  text-align: center;
+  padding: 12px 15px;
 }
 .gate-input input:focus{
   outline: none;

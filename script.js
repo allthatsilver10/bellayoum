@@ -172,7 +172,7 @@
      repository is public, so a determined person can read the files on
      GitHub directly. Treat it as a closed door, not a safe.
      ====================================================================== */
-  var PASSWORD = "bellayoum2026";
+  var PASSWORD = "1024";
 
   function initDoor(onOpen) {
     var gate = document.getElementById("gate");
@@ -193,6 +193,17 @@
 
     document.body.classList.add("locked");
     setTimeout(function () { field.focus(); }, 100);
+
+    // digits only, and submit itself once four are in — phone number pads
+    // often have no return key, so waiting for one would strand people
+    field.addEventListener("input", function () {
+      var digits = field.value.replace(/\D/g, "").slice(0, PASSWORD.length);
+      if (digits !== field.value) field.value = digits;
+      error.hidden = true;
+      if (digits.length === PASSWORD.length) {
+        form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+      }
+    });
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
