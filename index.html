@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Bella Youm — Stage Manager</title>
+<meta name="description" content="Bella Youm — stage manager and theatre producer based in Seoul. Portfolio and personal archive.">
+
+<!-- ─── favicon ──────────────────────────────────────────────────────
+     All paths on this site are RELATIVE (no leading slash) so the site
+     works from a plain folder, from GitHub Pages, and from a custom
+     domain without any changes.                                        -->
+<link rel="icon" href="favicon/favicon.svg" type="image/svg+xml">
+
+<!-- ─── social preview ─────────────────────────────────────────────── -->
+<meta property="og:title" content="Bella Youm — Stage Manager">
+<meta property="og:description" content="Portfolio and personal archive.">
+<meta property="og:image" content="images/opening.jpg">
+<meta property="og:type" content="website">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     1 · CURTAIN INTRO
+     Black → a circle of red curtain opens → the name → fades away.
+     Runs once per browser session, then never interrupts again.
+     ═══════════════════════════════════════════════════════════════════ -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-iris"><img src="images/curtain.jpg" alt=""></div>
+  <div class="intro-word">BELLA YOUM</div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     2 · HEADER
+     Always visible. The Fresnel lantern hangs at top centre and its
+     beam swings onto whichever item the cursor is over — including
+     the name on the left.
+     ═══════════════════════════════════════════════════════════════════ -->
+<header class="site-head" id="site-head">
+  <div class="head-inner">
+
+    <!-- name — also a spotlight target -->
+    <a class="mark" href="#/" data-spot data-nav="opening">
+      <b>BELLA YOUM</b>
+      <span data-en="Stage Manager" data-kr="무대감독">Stage Manager</span>
+    </a>
+
+    <!-- the lantern -->
+    <div class="lantern" aria-hidden="true">
+      <svg viewBox="0 0 170 128" fill="none" stroke="currentColor" stroke-width="3.4">
+        <path d="M85 0v11"/><rect x="75" y="11" width="20" height="10"/>
+        <path d="M50 33v28M120 33v28"/><path d="M50 40h10M110 40h10"/>
+        <rect x="59" y="24" width="52" height="46" rx="4"/>
+        <path d="M69 24v-5M85 24v-5M101 24v-5"/>
+        <rect class="lens" x="55" y="70" width="60" height="6" rx="3" stroke="none"/>
+        <path d="M56 78 36 112M114 78l20 34M66 80l-7 34M104 80l7 34"/>
+      </svg>
+    </div>
+
+    <!-- the light itself (drawn by script.js) -->
+    <div class="beam" id="beam" aria-hidden="true"></div>
+    <div class="pool" id="pool" aria-hidden="true"></div>
+    <div class="haze" aria-hidden="true"></div>
+
+    <!-- menu -->
+    <nav class="nav" aria-label="Main">
+      <a href="#/profile"   data-spot data-nav="profile"   data-en="Profile"   data-kr="프로필">Profile</a>
+      <a href="#/portfolio" data-spot data-nav="portfolio" data-en="Portfolio" data-kr="포트폴리오">Portfolio</a>
+      <a href="#/archive"   data-spot data-nav="archive"   data-en="Archive"   data-kr="아카이브">Archive</a>
+    </nav>
+    <a class="contact-link" href="#/contact" data-spot data-nav="contact"
+       data-en="Contact" data-kr="컨택">Contact</a>
+
+    <!-- language -->
+    <div class="lang">
+      <button type="button" data-lang="en" class="on">EN</button>
+      <span aria-hidden="true">/</span>
+      <button type="button" data-lang="kr">KR</button>
+    </div>
+  </div>
+</header>
+
+
+<main id="main">
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     3 · OPENING
+     One photograph, never cropped. Whatever space is left around it is
+     filled with a single flat tone, so it reads as a gallery mount.
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="page opening" id="page-opening">
+  <div class="portal">
+    <div class="portal-fig"><img src="images/opening.jpg" alt="Stage set, Stupid Fucking Bird" fetchpriority="high"></div>
+    <div class="portal-scrim" aria-hidden="true"></div>
+    <span class="label portal-meta">Fig. 01 — Stupid Fucking Bird</span>
+    <span class="label portal-year">Act II</span>
+    <h1 class="opening-line"
+        data-en="Tomorrow, built from my own footprints."
+        data-kr="나의 발자국들로 만들어가는 나의 내일.">Tomorrow, built from my own footprints.</h1>
+  </div>
+  <div class="opening-foot">
+    <span class="label" data-en="Stage Manager &amp; Theatre Producer"
+          data-kr="무대감독 · 공연기획">Stage Manager &amp; Theatre Producer</span>
+    <span class="label">Seoul · Since 2026</span>
+    <button class="ghost-btn" id="replay" type="button"
+            data-en="Replay intro" data-kr="인트로 다시보기">Replay intro</button>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     4 · PROFILE
+     Edit the text below directly — it is plain HTML, nothing generated.
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="page inner" id="page-profile" hidden>
+  <div class="page-head">
+    <h1 class="h-xl" data-en="Profile" data-kr="프로필">Profile</h1>
+    <span class="label">Seoul · Since 2026</span>
+  </div>
+
+  <div class="profile">
+    <figure class="profile-fig">
+      <img src="images/portrait.jpg" alt="Portrait of Bella Youm" loading="lazy">
+    </figure>
+
+    <div>
+      <p class="h-lg profile-lead"
+         data-en="Psychology taught me to read people. The stage taught me to time them."
+         data-kr="심리학은 사람을 읽는 법을, 무대는 그 사람들의 타이밍을 맞추는 법을 가르쳐 주었습니다.">
+        Psychology taught me to read people. The stage taught me to time them.</p>
+
+      <p class="body-text"
+         data-en="I am a stage manager and theatre producer based in Seoul. My work sits between two disciplines — the study of how people behave under pressure, and the craft of holding a production together while they do. Cue sheets, run schedules and rehearsal reports are, to me, instruments of care."
+         data-kr="서울을 기반으로 활동하는 무대감독이자 공연기획자입니다. 제 작업은 두 학문 사이에 있습니다. 압박 속에서 사람이 어떻게 행동하는지에 대한 연구와, 그 사람들이 그렇게 움직이는 동안 공연을 붙들고 있는 기술. 큐시트와 진행표, 리허설 리포트는 제게 배려의 도구입니다.">
+        I am a stage manager and theatre producer based in Seoul. My work sits between two
+        disciplines — the study of how people behave under pressure, and the craft of holding a
+        production together while they do. Cue sheets, run schedules and rehearsal reports are,
+        to me, instruments of care.</p>
+
+      <dl class="facts">
+        <div>
+          <dt data-en="Education" data-kr="학력">Education</dt>
+          <dd data-en="UC Berkeley — B.A. Psychology, Minor in Theatre Production"
+              data-kr="UC Berkeley — 심리학 전공, 연극기획 부전공">UC Berkeley — B.A. Psychology, Minor in Theatre Production</dd>
+        </div>
+        <div>
+          <dt data-en="Focus" data-kr="지향점">Focus</dt>
+          <dd data-en="Stage Management · Theatre &amp; Musical Producing"
+              data-kr="무대감독 · 연극/뮤지컬 기획">Stage Management · Theatre &amp; Musical Producing</dd>
+        </div>
+        <div>
+          <dt data-en="Practice" data-kr="보유 역량">Practice</dt>
+          <dd data-en="Cue sheets · Run schedules · Blocking notation · Production research"
+              data-kr="큐시트 작성 · 진행표 · 동선 기록 · 프로덕션 리서치">Cue sheets · Run schedules · Blocking notation · Production research</dd>
+        </div>
+        <div>
+          <dt data-en="Archive" data-kr="아카이브">Archive</dt>
+          <dd data-en="Pottery · Photography · Boxing"
+              data-kr="도예 · 사진 · 복싱">Pottery · Photography · Boxing</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="essay">
+    <div class="essay-head">
+      <span class="label" data-en="Essay" data-kr="에세이">Essay</span>
+      <span class="label faint" data-en="Artist Statement" data-kr="작가 노트">Artist Statement</span>
+    </div>
+    <div class="essay-body">
+      <p>“Everyone deserves a chance to fly.” Elphaba’s words from <em>Wicked</em> have stayed with
+        me for as long as I can remember. Having watched it with my family since childhood, she was
+        never only a character — she was a friend I could return to whenever I needed comfort.</p>
+      <p>As I grew older, my attention drifted past the performers and into everything happening
+        behind the curtain: the lighting, the sound, the scenic transitions, the coordination that
+        lets a performance appear seamless.</p>
+      <p>Looking back, that way of paying attention didn’t begin with theatre. Clay taught me
+        patience with imperfection — a shape only arrives after many small adjustments. Boxing,
+        over ten years, taught me to stay composed under pressure and to trust timing over force.
+        Photography trained my eye to notice what belongs inside a frame, and what should be left
+        out.</p>
+      <p>Each of these was quietly preparing me to see a production the way a stage manager does:
+        as something built piece by piece, held together by attention and care.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     5 · PORTFOLIO
+     Built from gallery-data.json. Add a folder to projects/ and the
+     production appears here.
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="page inner" id="page-portfolio" hidden>
+  <div class="page-head">
+    <h1 class="h-xl" data-en="Portfolio" data-kr="포트폴리오">Portfolio</h1>
+    <span class="label" data-en="Theatre · Musical · Performance"
+          data-kr="연극 · 뮤지컬 · 공연">Theatre · Musical · Performance</span>
+  </div>
+
+  <div id="productions"><!-- filled by script.js --></div>
+
+  <p class="label foot-note"
+     data-en="New productions are added below as they happen."
+     data-kr="새 공연은 아래로 계속 추가됩니다.">New productions are added below as they happen.</p>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     6 · ARCHIVE — the three rooms
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="page inner" id="page-archive" hidden>
+  <div class="page-head">
+    <h1 class="h-xl" data-en="Archive" data-kr="아카이브">Archive</h1>
+    <span class="label" data-en="Three rooms off the stage"
+          data-kr="무대 밖의 세 개의 방">Three rooms off the stage</span>
+  </div>
+  <p class="body-text archive-intro"
+     data-en="Everything outside the theatre that trained the same eye."
+     data-kr="극장 밖에서 같은 눈을 길러준 것들.">Everything outside the theatre that trained the same eye.</p>
+
+  <div class="doors" id="doors"><!-- filled by script.js --></div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     7 · ARCHIVE GALLERY — one layout, three independent rooms
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="page inner" id="page-gallery" hidden>
+  <div class="page-head">
+    <div>
+      <a class="back-link" href="#/archive" data-en="← Archive" data-kr="← 아카이브">← Archive</a>
+      <h1 class="h-xl" id="gallery-title">Gallery</h1>
+    </div>
+    <span class="label" id="gallery-count"></span>
+  </div>
+  <div class="gallery" id="gallery"><!-- filled by script.js --></div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     8 · CONTACT — two tickets under one lamp
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="page inner" id="page-contact" hidden>
+  <div class="page-head">
+    <h1 class="h-xl" data-en="Contact" data-kr="컨택">Contact</h1>
+    <span class="label" data-en="Admit two" data-kr="2인 입장">Admit two</span>
+  </div>
+
+  <div class="ticket-stage">
+    <div class="ticket-pair">
+
+      <a class="ticket" href="https://instagram.com/bella.youm" target="_blank" rel="noopener">
+        <span>
+          <span class="ticket-row">Instagram</span>
+          <span class="ticket-value">@bella.youm</span>
+        </span>
+        <span class="ticket-foot"><span>Row A · Seat 01</span><span aria-hidden="true">↗</span></span>
+      </a>
+
+      <span class="perforation" aria-hidden="true"></span>
+
+      <a class="ticket" href="mailto:allthatsilver10@gmail.com">
+        <span>
+          <span class="ticket-row">Email</span>
+          <span class="ticket-value">allthatsilver10<br>@gmail.com</span>
+        </span>
+        <span class="ticket-foot"><span>Row A · Seat 02</span><span aria-hidden="true">↗</span></span>
+      </a>
+
+      <span class="ticket-stub" aria-hidden="true"><span>Admit One · 2026</span></span>
+    </div>
+  </div>
+
+  <p class="contact-note"
+     data-en="For production enquiries, availability and full CV."
+     data-kr="공연 문의 · 스케줄 · 이력서 요청.">For production enquiries, availability and full CV.</p>
+</section>
+
+</main>
+
+
+<footer class="site-foot">
+  <span>Bella Youm © 2026</span>
+  <span id="foot-page">Opening</span>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     LIGHTBOX — click any photo to see it full size
+     ═══════════════════════════════════════════════════════════════════ -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lb-close" id="lb-close" type="button" aria-label="Close">Close</button>
+  <button class="lb-arrow lb-prev" id="lb-prev" type="button" aria-label="Previous">‹</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-arrow lb-next" id="lb-next" type="button" aria-label="Next">›</button>
+  <div class="lb-caption" id="lb-caption"></div>
+</div>
+
+
+<!-- Photo data. The .js copy lets the site run straight off the hard
+     drive; script.js prefers gallery-data.json when it can load it. -->
+<script src="gallery-data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

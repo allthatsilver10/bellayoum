@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+._*
+
+# Claude Code local settings
+.claude/
+
+# Generated — rebuild with: python3 tools/make-preview.py
+# (the real site is served from index.html, so this 4MB copy is not needed here)
+site-preview.html
+_verify.html
+
+# 시안 5종 — 기록용 로컬 보관, 사이트에는 불필요
+mockups/

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- The curtain iris from the intro, reduced to its simplest form:
+       a red circle opening in the dark. Readable down to 16px. -->
+  <rect width="64" height="64" fill="#08080A"/>
+  <circle cx="32" cy="32" r="19" fill="#A61C00"/>
+  <circle cx="32" cy="26" r="19" fill="#FFF6EC" opacity=".14"/>
+</svg>

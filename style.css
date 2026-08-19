@@ -1,0 +1,1060 @@
+/* ============================================================================
+   BELLA YOUM — Theatre Portfolio & Archive
+   ============================================================================
+
+   HOW THIS FILE IS ORGANISED
+     1  Design tokens      — every colour and size lives here, change once
+     2  Base
+     3  Header + Fresnel spotlight
+     4  Curtain intro
+     5  Pages (shared furniture)
+     6  Opening
+     7  Profile
+     8  Portfolio
+     9  Archive
+    10  Gallery
+    11  Contact
+    12  Lightbox
+    13  Footer
+    14  Responsive — tablet, then phone
+
+   IF YOU ONLY WANT TO CHANGE THE LOOK, section 1 is usually enough.
+   ========================================================================= */
+
+
+/* ============================================================================
+   1 · DESIGN TOKENS
+   ========================================================================= */
+:root{
+
+  /* ---- colour ------------------------------------------------------------
+     A dark theatre with three reds. Nothing else is coloured.              */
+  --black:    #08080A;   /* the page                                        */
+  --matte:    #101015;   /* flat mount around the opening photograph        */
+  --raised:   #121216;   /* quiet panels                                    */
+  --hair:     #24242B;   /* 1px rules                                       */
+  --hair-dim: #1A1A20;   /* quieter 1px rules                               */
+
+  --light:    #F2F0EC;   /* stage-light white — headings                    */
+  --soft:     #B9B7B3;   /* body copy                                       */
+  --dim:      #7C7C82;   /* labels                                          */
+  --faint:    #4A4A52;   /* the quietest text                               */
+
+  --red:      #6E0A11;   /* curtain red — the contact tickets               */
+  --red-deep: #4E060C;   /* ticket stub                                     */
+  --red-hot:  #A61C00;   /* the accent: active underline, drop cap          */
+  --glow:     #FFF6EC;   /* warm white — the intro name, lit type           */
+
+  /* ---- spacing -----------------------------------------------------------
+     One page margin and one gutter, used everywhere. This is what keeps
+     the galleries feeling ordered rather than scattered.                   */
+  --pad:  clamp(22px, 5vw, 84px);
+  --gut:  clamp(14px, 2vw, 28px);
+  --head: 116px;                     /* header height                       */
+  --open-top: clamp(16px, 2.2vw, 30px);  /* gap under the header on Opening */
+
+  /* ---- type --------------------------------------------------------------
+     One family in three roles: 300 for display, 400 for reading, 600 for
+     the small tracked labels. On black, lighter than 300 looks broken.
+
+     Avenir Next is a Mac font. Anyone on Windows falls back to Nunito Sans
+     or the system UI font. To make it identical everywhere, put a webfont
+     file in a fonts/ folder and add an @font-face rule here.               */
+  --sans: "Avenir Next", Avenir, "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+
+/* ============================================================================
+   2 · BASE
+   ========================================================================= */
+*,
+*::before,
+*::after{ box-sizing: border-box; margin: 0; padding: 0 }
+
+html{ scroll-behavior: smooth; -webkit-text-size-adjust: 100% }
+
+body{
+  background: var(--black);
+  color: var(--light);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img{ display: block; max-width: 100%; height: auto }
+a{ color: inherit; text-decoration: none }
+button{ font: inherit; color: inherit; background: none; border: 0; cursor: pointer }
+
+::selection{ background: var(--red-hot); color: #fff }
+
+/* keyboard users must always be able to see where they are */
+a:focus-visible,
+button:focus-visible{
+  outline: 2px solid var(--red-hot);
+  outline-offset: 3px;
+}
+
+/* shared small type ------------------------------------------------------- */
+.label{
+  font-size: 9.5px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--dim);
+}
+.label.faint{ color: var(--faint) }
+
+.h-xl{ font-size: clamp(34px, 5.6vw, 76px); line-height: 1;    letter-spacing: -.03em;  font-weight: 300 }
+.h-lg{ font-size: clamp(23px, 3.1vw, 40px); line-height: 1.1;  letter-spacing: -.022em; font-weight: 300 }
+
+.body-text{
+  font-size: 15px;
+  line-height: 1.82;
+  color: var(--soft);
+  max-width: 64ch;
+}
+
+.ghost-btn{
+  font-size: 9px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--dim);
+  border: 1px solid var(--hair);
+  padding: 8px 14px;
+  transition: color .2s, border-color .2s;
+}
+.ghost-btn:hover{ color: var(--light); border-color: var(--dim) }
+
+
+/* ============================================================================
+   3 · HEADER + FRESNEL SPOTLIGHT
+   ------------------------------------------------------------------------
+   The lantern hangs at top centre. script.js draws a cone from its lens to
+   whatever the cursor is over, so the light lands on the actual word at
+   whatever angle that takes — including the name over on the far left.
+   ========================================================================= */
+.site-head{
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--head);
+  z-index: 900;
+  background: var(--black);
+  border-bottom: 1px solid var(--hair-dim);
+  overflow: hidden;
+}
+
+.head-inner{
+  position: relative;
+  height: 100%;
+  padding: 0 var(--pad) 24px;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* the name ---------------------------------------------------------------- */
+.mark{
+  position: absolute;
+  left: var(--pad);
+  top: 26px;
+  z-index: 4;
+  padding: 3px 0;
+  color: #8B8B92;
+  transition: color .3s ease, text-shadow .3s ease;
+}
+.mark b{ display: block; font-size: 13px; letter-spacing: .36em; font-weight: 600 }
+.mark span{
+  display: block;
+  margin-top: 6px;
+  font-size: 8.5px;
+  letter-spacing: .26em;
+  font-weight: 600;
+  color: var(--faint);
+  transition: color .3s ease;
+}
+.mark:hover{ color: var(--light); text-shadow: 0 0 30px rgba(255,255,255,.5) }
+.mark:hover span{ color: var(--dim) }
+
+/* the lantern ------------------------------------------------------------- */
+.lantern{
+  position: absolute;
+  left: 50%;
+  top: 2px;
+  transform: translateX(-50%);
+  width: 62px;
+  color: #2C2C33;
+  z-index: 3;
+  pointer-events: none;
+}
+.lantern svg{ width: 100%; height: auto; display: block }
+.lantern .lens{ fill: #45454E }
+
+/* the light --------------------------------------------------------------- */
+.beam{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: clip-path .55s var(--ease), opacity .32s ease;
+}
+.beam.on{ opacity: 1 }
+
+.pool{
+  position: absolute;
+  height: 52px;
+  z-index: 1;
+  opacity: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,.4), rgba(255,255,255,0) 70%);
+  transition: left .55s var(--ease), width .55s, opacity .32s;
+}
+.pool.on{ opacity: 1 }
+
+/* a trace of haze in the air, so the beam has something to travel through */
+.haze{
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: .55;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: radial-gradient(110% 62% at 50% 0%, rgba(255,255,255,.05), transparent 70%);
+}
+
+/* menu -------------------------------------------------------------------- */
+.nav{
+  display: flex;
+  gap: clamp(26px, 4vw, 56px);
+  margin: 0 auto;
+  position: relative;
+  z-index: 4;
+}
+
+.nav a,
+.contact-link{
+  font-size: 11.5px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #7C7C84;
+  padding: 3px 0;
+  transition: color .3s ease, text-shadow .3s ease;
+}
+.nav a:hover,
+.contact-link:hover{ color: var(--light); text-shadow: 0 0 28px rgba(255,255,255,.5) }
+
+.nav a.active,
+.contact-link.active,
+.mark.active{ color: var(--light) }
+
+.nav a.active::after,
+.contact-link.active::after{
+  content: "";
+  display: block;
+  height: 1px;
+  margin-top: 6px;
+  background: var(--red-hot);
+}
+
+.contact-link{
+  position: absolute;
+  right: var(--pad);
+  bottom: 24px;
+  z-index: 4;
+}
+
+/* language ---------------------------------------------------------------- */
+.lang{
+  position: absolute;
+  right: var(--pad);
+  top: 28px;
+  z-index: 4;
+  display: flex;
+  gap: 6px;
+  font-size: 9px;
+  letter-spacing: .2em;
+  font-weight: 600;
+  color: var(--faint);
+}
+.lang button{ padding: 0; color: inherit; letter-spacing: inherit }
+.lang button.on{ color: var(--light) }
+
+/* There is no hamburger anywhere on this site. All four items are short
+   enough to stay on screen at 320px, and the brief asks for navigation that
+   is always easy to find — a menu you have to open is not that. */
+
+
+/* ============================================================================
+   4 · CURTAIN INTRO
+   ========================================================================= */
+.intro{
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: grid;
+  place-items: center;
+  background: #000;
+  pointer-events: none;
+}
+.intro.run{ animation: introOut .95s ease 3.35s forwards }
+.intro.skip{ display: none }
+
+@keyframes introOut{ to{ opacity: 0; visibility: hidden } }
+
+.intro-iris{
+  position: relative;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  animation: iris 1.55s cubic-bezier(.7, 0, .28, 1) .3s forwards;
+}
+.intro-iris img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@keyframes iris{ to{ width: min(48vw, 540px); height: min(48vw, 540px) } }
+
+/* the name reads warm white, not red — red on a red curtain disappears */
+.intro-word{
+  position: absolute;
+  font-size: clamp(30px, 6.4vw, 86px);
+  font-weight: 300;
+  letter-spacing: .2em;
+  text-indent: .2em;
+  color: var(--glow);
+  text-shadow: 0 0 60px rgba(255,240,220,.5), 0 0 18px rgba(255,240,220,.28);
+  opacity: 0;
+  animation: introWord 1.6s ease 1.85s forwards;
+}
+@keyframes introWord{
+    0%{ opacity: 0; transform: scale(.965) }
+   38%{ opacity: 1; transform: none }
+  100%{ opacity: 1; transform: scale(1.028) }
+}
+
+
+/* ============================================================================
+   5 · PAGES — shared furniture
+   ========================================================================= */
+/* The header is fixed, so every page has to start below it. That offset is
+   written into .opening and .inner rather than .page, because both of those
+   set `padding` as a shorthand — a padding-top on .page would be silently
+   cancelled by it. Only one rule ever sets a page's padding. */
+.page{ min-height: 100vh }
+.page[hidden]{ display: none }
+.page.entering{ animation: fadeUp .55s ease both }
+
+@keyframes fadeUp{
+  from{ opacity: 0; transform: translateY(6px) }
+  to  { opacity: 1; transform: none }
+}
+
+.inner{
+  padding:
+    calc(var(--head) + clamp(48px, 6.5vw, 96px))
+    var(--pad)
+    clamp(70px, 9vw, 124px);
+}
+
+.page-head{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+  margin-bottom: clamp(34px, 5vw, 68px);
+  border-bottom: 1px solid var(--hair);
+}
+
+.back-link{
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 9.5px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--dim);
+  transition: color .2s;
+}
+.back-link:hover{ color: var(--light) }
+
+.foot-note{
+  padding-top: 34px;
+  border-top: 1px solid var(--hair-dim);
+}
+
+
+/* ============================================================================
+   6 · OPENING
+   ------------------------------------------------------------------------
+   object-fit: contain means the photograph is never cropped. The space
+   that leaves over is filled with one flat tone (--matte).
+   ========================================================================= */
+.opening{ padding: calc(var(--head) + var(--open-top)) var(--pad) 0 }
+
+.portal{
+  position: relative;
+  overflow: hidden;
+  background: var(--matte);
+  border: 1px solid var(--hair);
+  /* fills the screen below the header, leaving room for the caption strip */
+  height: calc(100vh - var(--head) - var(--open-top) - clamp(74px, 10vh, 104px));
+  min-height: 380px;
+}
+
+.portal-fig{ position: absolute; inset: 0; z-index: 1 }
+.portal-fig img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 2.2s var(--ease);
+}
+.portal:hover .portal-fig img{ transform: scale(1.012) }
+
+/* light falling from the fly bar */
+.portal::before{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 62%;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(58% 100% at 50% 0%, rgba(255,255,255,.07), transparent 72%);
+}
+
+/* keeps the title readable over any photograph */
+.portal-scrim{
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 48%;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(3,3,5,.74) 0%, rgba(3,3,5,.30) 46%, transparent 100%);
+}
+
+.portal-meta{ position: absolute; left: clamp(18px, 2.4vw, 34px); top: clamp(16px, 2.2vw, 28px); z-index: 4 }
+.portal-year{ position: absolute; right: clamp(18px, 2.4vw, 34px); top: clamp(16px, 2.2vw, 28px); z-index: 4 }
+
+.opening-line{
+  position: absolute;
+  left: clamp(18px, 2.6vw, 40px);
+  bottom: clamp(18px, 2.6vw, 38px);
+  z-index: 4;
+  max-width: 17ch;
+  font-size: clamp(21px, 3.5vw, 50px);
+  font-weight: 300;
+  line-height: 1.14;
+  letter-spacing: -.028em;
+  text-wrap: balance;
+}
+
+.opening-foot{
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 14px 2px 0;
+}
+.opening-foot .ghost-btn{ margin-left: auto }
+
+
+/* ============================================================================
+   7 · PROFILE
+   ========================================================================= */
+.profile{
+  display: grid;
+  grid-template-columns: minmax(220px, 310px) 1fr;
+  gap: clamp(30px, 5vw, 84px);
+  align-items: start;
+  margin-bottom: clamp(52px, 7vw, 104px);
+}
+
+.profile-fig{
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--raised);
+}
+.profile-fig img{ width: 100%; height: 100%; object-fit: cover }
+.profile-fig::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(78% 68% at 50% 30%, transparent 52%, rgba(0,0,0,.42) 100%);
+}
+
+.profile-lead{ margin-bottom: 26px; max-width: 22ch }
+
+.facts{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px 40px;
+  margin-top: 34px;
+  padding-top: 26px;
+  border-top: 1px solid var(--hair);
+}
+.facts dt{
+  margin-bottom: 8px;
+  font-size: 9px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--dim);
+}
+.facts dd{ font-size: 14px; line-height: 1.6; color: #DCDAD6 }
+
+.essay{
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: clamp(24px, 4vw, 62px);
+  padding-top: 26px;
+  border-top: 1px solid var(--hair);
+}
+.essay-head{ display: grid; gap: 10px; align-content: start }
+
+.essay-body{
+  columns: 2;
+  column-gap: clamp(28px, 4vw, 62px);
+  font-size: 14.5px;
+  line-height: 1.88;
+  color: var(--soft);
+}
+.essay-body p{ margin-bottom: 1.12em; break-inside: avoid-column }
+.essay-body em{ color: var(--light); font-style: italic }
+.essay-body p:first-child::first-letter{
+  float: left;
+  margin: 6px 9px 0 0;
+  font-size: 46px;
+  line-height: .8;
+  font-weight: 300;
+  color: var(--red-hot);
+}
+
+
+/* ============================================================================
+   8 · PORTFOLIO
+   ========================================================================= */
+.production{
+  display: grid;
+  grid-template-columns: 1fr minmax(230px, 300px);
+  gap: clamp(28px, 4.5vw, 74px);
+  padding: clamp(40px, 5vw, 76px) 0;
+  border-top: 1px solid var(--hair-dim);
+}
+.production:first-child{ border-top: 1px solid var(--hair) }
+
+/* the slideshow ----------------------------------------------------------- */
+.slideshow{
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: #000;
+  cursor: pointer;
+  box-shadow: 0 40px 90px -56px #000;
+}
+.slideshow img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity .75s ease;
+}
+.slideshow img.on{ opacity: 1 }
+.slideshow::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(84% 74% at 50% 40%, transparent 50%, rgba(0,0,0,.4) 100%);
+}
+
+.slide-ui{
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 15px 17px;
+}
+.dots{ display: flex; gap: 6px }
+.dot{ width: 18px; height: 1px; background: rgba(255,255,255,.3) }
+.dot.on{ background: #fff; box-shadow: 0 0 12px rgba(255,255,255,.85) }
+.slide-hint{
+  font-size: 9px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(255,255,255,.62);
+}
+
+/* the credits ------------------------------------------------------------- */
+.production-no{
+  margin-bottom: 14px;
+  font-size: 9.5px;
+  letter-spacing: .28em;
+  font-weight: 600;
+  color: var(--dim);
+}
+.production h2{
+  margin-bottom: 24px;
+  font-size: clamp(23px, 2.5vw, 33px);
+  font-weight: 300;
+  letter-spacing: -.025em;
+  line-height: 1.1;
+}
+.credits{ border-top: 1px solid var(--hair-dim) }
+.credits > div{
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hair-dim);
+  font-size: 13px;
+  color: #D2D0CC;
+}
+.credits dt{
+  padding-top: 3px;
+  font-size: 9px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--dim);
+}
+
+
+/* ============================================================================
+   9 · ARCHIVE — three doors
+   ========================================================================= */
+.archive-intro{ margin-bottom: clamp(26px, 3.6vw, 48px) }
+
+.doors{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gut);
+}
+
+.door{
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  display: block;
+  background: #000;
+}
+.door img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(.42) brightness(.74);
+  transition: filter .65s ease, transform 1.15s var(--ease);
+}
+
+/* the curtain wash appears on the hovered door only */
+.door-veil{
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .55s ease;
+  background:
+    radial-gradient(84% 72% at 50% 100%, rgba(166,28,0,.42), transparent 70%),
+    linear-gradient(to top, rgba(110,10,17,.94) 0%, rgba(110,10,17,.56) 46%, rgba(110,10,17,.08) 100%);
+}
+
+.door-label{
+  position: absolute;
+  left: 0; right: 0; bottom: 30px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .5s ease .05s, transform .55s var(--ease) .05s;
+}
+.door-label b{
+  display: block;
+  font-size: clamp(17px, 1.8vw, 23px);
+  font-weight: 300;
+  letter-spacing: .02em;
+  text-shadow: 0 0 36px rgba(0,0,0,.6);
+}
+.door-label i{
+  display: block;
+  margin-top: 10px;
+  font-style: normal;
+  font-size: 8.5px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: .75;
+}
+
+.door:hover .door-veil,
+.door:focus-visible .door-veil{ opacity: 1 }
+.door:hover .door-label,
+.door:focus-visible .door-label{ opacity: 1; transform: none }
+.door:hover img,
+.door:focus-visible img{ filter: grayscale(0) brightness(.94); transform: scale(1.035) }
+
+.door-index{
+  position: absolute;
+  top: 15px;
+  left: 16px;
+  z-index: 2;
+  font-size: 8.5px;
+  letter-spacing: .28em;
+  font-weight: 600;
+  color: #fff;
+  opacity: .55;
+}
+
+
+/* ============================================================================
+   10 · GALLERY
+   ------------------------------------------------------------------------
+   Justified rows. Each row is filled to the exact page width, so the left
+   margin, right margin and every gap are identical on every row — but the
+   photographs keep their own proportions and are never cropped. script.js
+   works out the row heights; this file only styles them.
+   ========================================================================= */
+.gallery{ display: flex; flex-direction: column; gap: var(--gut) }
+
+.gallery-row{ display: flex; gap: var(--gut) }
+
+.gallery-item{
+  position: relative;
+  overflow: hidden;
+  background: var(--raised);
+  cursor: zoom-in;
+  flex: none;                       /* width is set by script.js */
+}
+.gallery-item img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.94);
+  transition: filter .55s, transform 1.05s var(--ease);
+}
+.gallery-item:hover img{ filter: brightness(1.06); transform: scale(1.035) }
+
+.gallery-item figcaption{
+  position: absolute;
+  left: 13px;
+  bottom: 11px;
+  font-size: 8.5px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0;
+  text-shadow: 0 2px 10px #000;
+  transition: opacity .38s;
+}
+.gallery-item:hover figcaption{ opacity: .95 }
+
+.gallery-empty{
+  padding: 60px 0;
+  text-align: center;
+  color: var(--dim);
+  font-size: 14px;
+}
+
+
+/* ============================================================================
+   11 · CONTACT
+   ========================================================================= */
+.ticket-stage{
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(46px, 8vw, 116px) 0;
+}
+/* the same overhead light as the opening photograph */
+.ticket-stage::before{
+  content: "";
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(96vw, 940px);
+  height: 540px;
+  pointer-events: none;
+  background: radial-gradient(48% 52% at 50% 8%, rgba(255,255,255,.085), transparent 74%);
+}
+
+.ticket-pair{
+  position: relative;
+  z-index: 2;
+  display: flex;
+  box-shadow: 0 46px 100px -54px #000;
+}
+
+.ticket{
+  position: relative;
+  width: clamp(226px, 26.5vw, 336px);
+  min-height: 242px;
+  padding: 32px 30px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--red);
+  color: #F3E4E1;
+  transition: background .4s ease, transform .4s ease;
+}
+.ticket:hover{ background: #83121A; transform: translateY(-4px) }
+
+.ticket-row{
+  display: block;
+  font-size: 8.5px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: .74;
+}
+.ticket-value{
+  display: block;
+  margin-top: 9px;
+  font-size: clamp(17px, 1.75vw, 23px);
+  font-weight: 300;
+  letter-spacing: -.012em;
+  line-height: 1.25;
+}
+.ticket-foot{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.26);
+  font-size: 8.5px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: .72;
+}
+
+/* the tear line between the two tickets */
+.perforation{
+  position: relative;
+  width: 0;
+  z-index: 3;
+  border-left: 1px dashed rgba(255,255,255,.5);
+}
+.perforation::before,
+.perforation::after{
+  content: "";
+  position: absolute;
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--black);
+}
+.perforation::before{ top: -10px }
+.perforation::after{ bottom: -10px }
+
+.ticket-stub{
+  width: clamp(54px, 5.6vw, 74px);
+  background: var(--red-deep);
+  display: grid;
+  place-items: center;
+}
+.ticket-stub span{
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 8.5px;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #DDB4AF;
+}
+
+.contact-note{ text-align: center; color: var(--dim); font-size: 13px }
+
+
+/* ============================================================================
+   12 · LIGHTBOX
+   ========================================================================= */
+.lightbox{
+  position: fixed;
+  inset: 0;
+  z-index: 6000;
+  display: grid;
+  place-items: center;
+  padding: clamp(40px, 6vw, 80px);
+  background: rgba(4,4,6,.96);
+  animation: fadeUp .3s ease both;
+}
+.lightbox[hidden]{ display: none }
+.lightbox img{
+  max-width: 100%;
+  max-height: 82vh;
+  width: auto;
+  object-fit: contain;
+}
+
+.lb-close{
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  font-size: 9px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--dim);
+  border: 1px solid var(--hair);
+  padding: 8px 14px;
+}
+.lb-close:hover{ color: var(--light); border-color: var(--dim) }
+
+.lb-arrow{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  font-size: 34px;
+  line-height: 1;
+  color: var(--dim);
+  transition: color .2s;
+}
+.lb-arrow:hover{ color: var(--light) }
+.lb-prev{ left: clamp(8px, 2vw, 26px) }
+.lb-next{ right: clamp(8px, 2vw, 26px) }
+
+.lb-caption{
+  position: absolute;
+  bottom: 26px;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--dim);
+}
+
+
+/* ============================================================================
+   13 · FOOTER
+   ========================================================================= */
+.site-foot{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 24px var(--pad) 46px;
+  border-top: 1px solid var(--hair-dim);
+  font-size: 9px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--faint);
+}
+
+
+/* ============================================================================
+   14 · RESPONSIVE
+   ========================================================================= */
+
+/* ---- tablet ------------------------------------------------------------- */
+@media (max-width: 980px){
+  :root{ --head: 104px }
+
+  .profile{ grid-template-columns: 1fr }
+  .profile-fig{ max-width: 320px }
+
+  .essay{ grid-template-columns: 1fr }
+  .essay-body{ columns: 1 }
+
+  .production{ grid-template-columns: 1fr }
+}
+
+/* ---- large phone / small tablet ----------------------------------------- */
+@media (max-width: 760px){
+  .doors{ grid-template-columns: 1fr }
+  .door{ aspect-ratio: 16 / 10 }
+
+  .facts{ grid-template-columns: 1fr }
+
+  .ticket-pair{ flex-direction: column }
+  .ticket-stub{ display: none }
+  .perforation{
+    width: auto;
+    height: 0;
+    border-left: 0;
+    border-top: 1px dashed rgba(255,255,255,.5);
+  }
+  .perforation::before{ left: -10px; top: -10px }
+  .perforation::after{ left: auto; right: -10px; top: -10px; bottom: auto }
+}
+
+/* ---- phone --------------------------------------------------------------
+   Two rows: the name and language on top, all four menu items underneath.
+   Nothing folds away. The lantern is dropped — there is no room for a
+   fixture, and a spotlight is meaningless on a touch screen with no hover. */
+@media (max-width: 640px){
+  :root{ --head: 92px }
+
+  .head-inner{
+    align-items: flex-end;
+    justify-content: center;
+    gap: clamp(12px, 4.4vw, 22px);
+    padding: 0 var(--pad) 13px;
+  }
+
+  .mark{ top: 15px }
+  .mark b{ font-size: 11px; letter-spacing: .3em }
+  .mark span{ display: none }
+
+  .lang{ top: 15px }
+
+  .lantern,
+  .beam,
+  .pool,
+  .haze{ display: none }
+
+  /* the menu becomes one centred row, Contact included */
+  .nav{ margin: 0; gap: clamp(12px, 4.4vw, 22px) }
+  .contact-link{ position: static }
+  .nav a,
+  .contact-link{ font-size: 9px; letter-spacing: .14em }
+  .nav a.active::after,
+  .contact-link.active::after{ margin-top: 4px }
+
+  .opening-line{ font-size: clamp(19px, 6vw, 28px) }
+  .portal{ height: auto; aspect-ratio: 4 / 5 }
+  .portal-year{ display: none }   /* it would collide with the caption here */
+  .opening-foot .ghost-btn{ margin-left: 0 }
+
+  .lb-arrow{ width: 44px; height: 44px; font-size: 28px }
+  .lb-close{ top: 14px; right: 14px }
+}
+
+/* ---- very narrow phones -------------------------------------------------- */
+@media (max-width: 380px){
+  .nav a,
+  .contact-link{ font-size: 8.5px; letter-spacing: .1em }
+  .head-inner,
+  .nav{ gap: 10px }
+}
+
+/* ---- people who ask for less movement ----------------------------------- */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  html{ scroll-behavior: auto }
+}

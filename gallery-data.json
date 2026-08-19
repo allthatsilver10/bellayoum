@@ -1,0 +1,174 @@
+{
+  "generated": "2026-08-19T05:10:53+00:00",
+  "projects": [
+    {
+      "slug": "2025-11-stupid-fucking-bird",
+      "title": "Stupid Fucking Bird",
+      "date": "November 2025",
+      "director": "J. Han",
+      "venue": "Studio Theatre, Seoul",
+      "role": "Stage Manager",
+      "photos": [
+        {
+          "src": "projects/2025-11-stupid-fucking-bird/2025-11-20_01.jpg",
+          "w": 1800,
+          "h": 1200
+        },
+        {
+          "src": "projects/2025-11-stupid-fucking-bird/2025-11-20_02.jpg",
+          "w": 736,
+          "h": 920
+        },
+        {
+          "src": "projects/2025-11-stupid-fucking-bird/2025-11-20_03.jpg",
+          "w": 1086,
+          "h": 724
+        }
+      ]
+    },
+    {
+      "slug": "2025-05-the-cherry-orchard",
+      "title": "The Cherry Orchard",
+      "date": "May 2025",
+      "director": "S. Park",
+      "venue": "Daehakro Arts Centre",
+      "role": "Assistant Stage Manager",
+      "photos": [
+        {
+          "src": "projects/2025-05-the-cherry-orchard/2025-05-14_01.jpg",
+          "w": 1500,
+          "h": 1000
+        },
+        {
+          "src": "projects/2025-05-the-cherry-orchard/2025-05-14_02.jpg",
+          "w": 1086,
+          "h": 724
+        },
+        {
+          "src": "projects/2025-05-the-cherry-orchard/2025-05-14_03.jpg",
+          "w": 768,
+          "h": 1024
+        }
+      ]
+    },
+    {
+      "slug": "2024-08-a-midsummer-nights-dream",
+      "title": "A Midsummer Night's Dream",
+      "date": "August 2024",
+      "director": "M. Lee",
+      "venue": "Open-air Stage, Berkeley",
+      "role": "Production Assistant",
+      "photos": [
+        {
+          "src": "projects/2024-08-a-midsummer-nights-dream/2024-08-02_01.jpg",
+          "w": 724,
+          "h": 1086
+        },
+        {
+          "src": "projects/2024-08-a-midsummer-nights-dream/2024-08-02_02.jpg",
+          "w": 769,
+          "h": 1024
+        }
+      ]
+    }
+  ],
+  "archive": {
+    "pottery": {
+      "title": "Pottery",
+      "title_kr": "도예",
+      "cover": "images/archive-pottery.jpg",
+      "count": 3,
+      "items": [
+        {
+          "src": "archive/pottery/2024-09-12_group.jpg",
+          "w": 1600,
+          "h": 1068,
+          "caption": "2024 · Group"
+        },
+        {
+          "src": "archive/pottery/2024-06-03_vase-a.jpg",
+          "w": 673,
+          "h": 893,
+          "caption": "2024 · Vase A"
+        },
+        {
+          "src": "archive/pottery/2023-11-28_vase-b.jpg",
+          "w": 769,
+          "h": 1024,
+          "caption": "2023 · Vase B"
+        }
+      ]
+    },
+    "photography": {
+      "title": "Photography",
+      "title_kr": "사진",
+      "cover": "images/archive-photography.jpg",
+      "count": 6,
+      "items": [
+        {
+          "src": "archive/photography/2025-11-21_proscenium.jpg",
+          "w": 768,
+          "h": 1024,
+          "caption": "2025 · Proscenium"
+        },
+        {
+          "src": "archive/photography/2025-10-04_hangang.jpg",
+          "w": 1800,
+          "h": 1200,
+          "caption": "2025 · Hangang",
+          "feature": true
+        },
+        {
+          "src": "archive/photography/2024-07-19_rolleiflex.jpg",
+          "w": 900,
+          "h": 1350,
+          "caption": "2024 · Rolleiflex"
+        },
+        {
+          "src": "archive/photography/2023-12-01_polaroid.jpg",
+          "w": 1200,
+          "h": 800,
+          "caption": "2023 · Polaroid"
+        },
+        {
+          "src": "archive/photography/2023-03-09_house.jpg",
+          "w": 736,
+          "h": 920,
+          "caption": "2023 · House"
+        },
+        {
+          "src": "archive/photography/2022-08-15_shelf.jpg",
+          "w": 1200,
+          "h": 800,
+          "caption": "2022 · Shelf"
+        }
+      ]
+    },
+    "boxing": {
+      "title": "Boxing",
+      "title_kr": "복싱",
+      "cover": "images/archive-boxing.jpg",
+      "count": 3,
+      "items": [
+        {
+          "src": "archive/boxing/2024-05-22_gym.jpg",
+          "w": 1600,
+          "h": 1067,
+          "caption": "2024 · Gym"
+        },
+        {
+          "src": "archive/boxing/2023-08-11_bag.jpg",
+          "w": 1300,
+          "h": 866,
+          "caption": "2023 · Bag"
+        },
+        {
+          "src": "archive/boxing/2022-04-30_pads.jpg",
+          "w": 1300,
+          "h": 868,
+          "caption": "2022 · Pads"
+        }
+      ]
+    }
+  }
+}
