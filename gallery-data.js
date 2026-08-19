@@ -2,75 +2,65 @@
    Identical to gallery-data.json; exists so the site also works
    when index.html is opened directly from the hard drive. */
 window.GALLERY_DATA = {
-  "generated": "2026-08-19T05:10:53+00:00",
+  "generated": "2026-08-19T06:28:00+00:00",
   "projects": [
     {
-      "slug": "2025-11-stupid-fucking-bird",
+      "slug": "2026-05-stupid-fucking-bird",
       "title": "Stupid Fucking Bird",
-      "date": "November 2025",
-      "director": "J. Han",
-      "venue": "Studio Theatre, Seoul",
-      "role": "Stage Manager",
-      "photos": [
-        {
-          "src": "projects/2025-11-stupid-fucking-bird/2025-11-20_01.jpg",
-          "w": 1800,
-          "h": 1200
-        },
-        {
-          "src": "projects/2025-11-stupid-fucking-bird/2025-11-20_02.jpg",
-          "w": 736,
-          "h": 920
-        },
-        {
-          "src": "projects/2025-11-stupid-fucking-bird/2025-11-20_03.jpg",
-          "w": 1086,
-          "h": 724
-        }
-      ]
-    },
-    {
-      "slug": "2025-05-the-cherry-orchard",
-      "title": "The Cherry Orchard",
-      "date": "May 2025",
-      "director": "S. Park",
-      "venue": "Daehakro Arts Centre",
+      "date": "May 2026",
+      "director": "Michael Karezin",
+      "venue": "Ciel Creative Space",
       "role": "Assistant Stage Manager",
       "photos": [
         {
-          "src": "projects/2025-05-the-cherry-orchard/2025-05-14_01.jpg",
+          "src": "projects/2026-05-stupid-fucking-bird/01.jpg",
           "w": 1500,
-          "h": 1000
+          "h": 2000
         },
         {
-          "src": "projects/2025-05-the-cherry-orchard/2025-05-14_02.jpg",
-          "w": 1086,
-          "h": 724
+          "src": "projects/2026-05-stupid-fucking-bird/02.jpg",
+          "w": 1500,
+          "h": 2000
         },
         {
-          "src": "projects/2025-05-the-cherry-orchard/2025-05-14_03.jpg",
-          "w": 768,
-          "h": 1024
-        }
-      ]
-    },
-    {
-      "slug": "2024-08-a-midsummer-nights-dream",
-      "title": "A Midsummer Night's Dream",
-      "date": "August 2024",
-      "director": "M. Lee",
-      "venue": "Open-air Stage, Berkeley",
-      "role": "Production Assistant",
-      "photos": [
-        {
-          "src": "projects/2024-08-a-midsummer-nights-dream/2024-08-02_01.jpg",
-          "w": 724,
-          "h": 1086
+          "src": "projects/2026-05-stupid-fucking-bird/03.jpg",
+          "w": 2000,
+          "h": 1500
         },
         {
-          "src": "projects/2024-08-a-midsummer-nights-dream/2024-08-02_02.jpg",
-          "w": 769,
-          "h": 1024
+          "src": "projects/2026-05-stupid-fucking-bird/04.jpg",
+          "w": 2000,
+          "h": 1500
+        },
+        {
+          "src": "projects/2026-05-stupid-fucking-bird/05.jpg",
+          "w": 2000,
+          "h": 1303
+        },
+        {
+          "src": "projects/2026-05-stupid-fucking-bird/06.jpg",
+          "w": 2000,
+          "h": 1500
+        },
+        {
+          "src": "projects/2026-05-stupid-fucking-bird/07.jpg",
+          "w": 2000,
+          "h": 1500
+        },
+        {
+          "src": "projects/2026-05-stupid-fucking-bird/08.jpg",
+          "w": 2000,
+          "h": 1500
+        },
+        {
+          "src": "projects/2026-05-stupid-fucking-bird/09.jpg",
+          "w": 2000,
+          "h": 1500
+        },
+        {
+          "src": "projects/2026-05-stupid-fucking-bird/10.jpg",
+          "w": 2000,
+          "h": 1500
         }
       ]
     }
