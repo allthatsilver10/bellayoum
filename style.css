@@ -292,6 +292,120 @@ button:focus-visible{
 
 
 /* ============================================================================
+   3.5 · THE DOOR
+   ------------------------------------------------------------------------
+   Shown before anything else. While `body.locked` is set, the site itself is
+   not rendered at all — so a visitor who follows the link sees only this.
+   ========================================================================= */
+body.locked .site-head,
+body.locked main,
+body.locked .site-foot,
+body.locked .intro{ display: none !important }
+
+.gate{
+  position: fixed;
+  inset: 0;
+  z-index: 7000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--black);
+}
+.gate[hidden]{ display: none }
+.gate.opening{ animation: gateOut .6s ease forwards }
+@keyframes gateOut{ to{ opacity: 0; visibility: hidden } }
+
+/* a single ticket, the same object as the contact page */
+.gate-card{
+  display: flex;
+  width: min(520px, 100%);
+  box-shadow: 0 46px 100px -54px #000;
+  animation: fadeUp .7s ease both;
+}
+.gate-stub{
+  width: clamp(46px, 12vw, 66px);
+  background: var(--red-deep);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.gate-stub span{
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 8.5px;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #DDB4AF;
+}
+.gate-body{
+  flex: 1;
+  background: var(--red);
+  color: #F3E4E1;
+  padding: clamp(26px, 5vw, 38px) clamp(22px, 5vw, 34px);
+}
+.gate-row{
+  display: block;
+  font-size: 8.5px;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: .74;
+}
+.gate-title{
+  font-size: clamp(24px, 4.4vw, 34px);
+  font-weight: 300;
+  letter-spacing: -.02em;
+  margin: 12px 0 10px;
+}
+.gate-note{ font-size: 13px; line-height: 1.6; opacity: .8; margin-bottom: 22px }
+
+.gate-input{ display: flex; gap: 0 }
+.gate-input input{
+  flex: 1;
+  min-width: 0;
+  background: rgba(0,0,0,.22);
+  border: 1px solid rgba(255,255,255,.3);
+  border-right: 0;
+  color: #FFF4F1;
+  font: inherit;
+  font-size: 15px;
+  letter-spacing: .18em;
+  padding: 13px 15px;
+}
+.gate-input input:focus{
+  outline: none;
+  border-color: rgba(255,255,255,.7);
+  background: rgba(0,0,0,.34);
+}
+.gate-input button{
+  border: 1px solid rgba(255,255,255,.3);
+  background: rgba(255,255,255,.94);
+  color: var(--red);
+  font-size: 9.5px;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0 20px;
+  transition: background .25s;
+}
+.gate-input button:hover{ background: #fff }
+
+.gate-error{
+  margin-top: 14px;
+  font-size: 11.5px;
+  letter-spacing: .04em;
+  color: #FFD9D2;
+}
+.gate-error[hidden]{ display: none }
+.gate-card.wrong{ animation: shake .4s ease }
+@keyframes shake{
+  0%,100%{ transform: translateX(0) }
+  25%{ transform: translateX(-7px) }
+  75%{ transform: translateX(7px) }
+}
+
+/* ============================================================================
    4 · CURTAIN INTRO
    ========================================================================= */
 .intro{

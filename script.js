@@ -162,6 +162,63 @@
   }
 
   /* ==========================================================================
+     3.5 · THE DOOR
+     ------------------------------------------------------------------------
+     TO CHANGE THE PASSWORD: put the new one in PASSWORD below. That is the
+     only line you need to touch.
+
+     BE HONEST ABOUT WHAT THIS IS. It stops the site from opening to anyone
+     who follows the link, which is what it is for. It is not security: the
+     repository is public, so a determined person can read the files on
+     GitHub directly. Treat it as a closed door, not a safe.
+     ====================================================================== */
+  var PASSWORD = "bellayoum2026";
+
+  function initDoor(onOpen) {
+    var gate = document.getElementById("gate");
+    var form = document.getElementById("gate-form");
+    var field = document.getElementById("gate-pass");
+    var error = document.getElementById("gate-error");
+    var card = document.querySelector(".gate-card");
+    if (!gate || !form) { onOpen(); return; }
+
+    var alreadyIn = false;
+    try { alreadyIn = sessionStorage.getItem("doorOpen") === "1"; } catch (e) { /* private mode */ }
+
+    if (alreadyIn) {                    // already let in earlier this visit
+      gate.hidden = true;
+      onOpen();
+      return;
+    }
+
+    document.body.classList.add("locked");
+    setTimeout(function () { field.focus(); }, 100);
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      if (field.value.trim() !== PASSWORD) {
+        error.hidden = false;
+        card.classList.remove("wrong");
+        void card.offsetWidth;          // restart the shake
+        card.classList.add("wrong");
+        field.select();
+        return;
+      }
+
+      try { sessionStorage.setItem("doorOpen", "1"); } catch (e2) { /* ignore */ }
+      error.hidden = true;
+      gate.classList.add("opening");
+      document.body.classList.remove("locked");
+
+      setTimeout(function () {
+        gate.hidden = true;
+        onOpen();                       // and now the curtain goes up
+      }, 520);
+    });
+  }
+
+  /* ==========================================================================
      4 · CURTAIN INTRO
      ------------------------------------------------------------------------
      Plays once per browser session so it never gets in the way of someone
@@ -541,10 +598,12 @@
      10 · START
      ====================================================================== */
   function start() {
-    initIntro();
     initSpotlight();
     initLightbox();
     initLanguage();
+
+    // the door comes first; the curtain only rises once someone is let in
+    initDoor(function () { initIntro(); });
 
     loadData().then(function (data) {
       DATA = data;

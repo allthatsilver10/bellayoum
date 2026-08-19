@@ -24,6 +24,37 @@
 
 <body>
 
+<!-- Lock before the rest of the page is parsed, so the site never flashes
+     into view for a moment before the door appears. -->
+<script>
+  try {
+    if (sessionStorage.getItem("doorOpen") !== "1") document.body.className = "locked";
+  } catch (e) { document.body.className = "locked"; }
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     0 · THE DOOR
+     A quiet gate so the portfolio is not simply stumbled into. It is a
+     curtain, not a lock — see the note in script.js.
+     ═══════════════════════════════════════════════════════════════════ -->
+<div class="gate" id="gate">
+  <form class="gate-card" id="gate-form" autocomplete="off">
+    <div class="gate-stub" aria-hidden="true"><span>Admit One</span></div>
+    <div class="gate-body">
+      <span class="gate-row">Bella Youm</span>
+      <h1 class="gate-title" data-en="By invitation" data-kr="초대받은 분만">By invitation</h1>
+      <p class="gate-note" data-en="Please enter the password from the invitation."
+         data-kr="초대장에 적힌 비밀번호를 입력해 주세요.">Please enter the password from the invitation.</p>
+      <div class="gate-input">
+        <input type="password" id="gate-pass" aria-label="Password" autocomplete="current-password" required>
+        <button type="submit" data-en="Enter" data-kr="입장">Enter</button>
+      </div>
+      <p class="gate-error" id="gate-error" hidden
+         data-en="That password is not right." data-kr="비밀번호가 맞지 않습니다.">That password is not right.</p>
+    </div>
+  </form>
+</div>
+
 <!-- ═══════════════════════════════════════════════════════════════════
      1 · CURTAIN INTRO
      Black → a circle of red curtain opens → the name → fades away.
